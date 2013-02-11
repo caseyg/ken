@@ -14,18 +14,21 @@
     <!-- Details  -->
     <script type="text/x-ejs-template" name="details">
       <a class="close-details image" href="#">
-        <img src="<%= object.properties.image %>"/>
+        <img src="<%= object.properties.thumb %>"/>
         <div class="label">Close</div>
       </a>
       <div class="details-wrapper">
-      <% if (object.get('website')) { %>
-        <h1><a target="_blank" href="<%= object.get('website') %>"><%= object.get('name') %></a></h1>
+      <% if (object.get('link')) { %>
+        <h1><a target="_blank" href="<%= object.get('link') %>"><%= object.get('name') %></a></h1>
       <% } else { %>
-        h1><%= object.get('name') %></h1>
+        <h1><%= object.get('name') %></h1>
       <% } %>
+      <div class="date">
+        <%= object.get('date') %>
+      </div>
       <div class="abstract">
-        <%= object.get('abstract') %>
-        [ <a href="<%= object.get('website') %>" target="_blank">Read More</a> ]
+        <%= object.get('excerpt') %>
+        [ <a href="<%= object.get('link') %>" target="_blank">Read More</a> ]
       </div>
       <% _.each(object.type().properties, function(p, key) { %>
         <% if (p.meta && p.meta.details) { %>
@@ -48,7 +51,7 @@
     <!-- Item  -->
     <script type="text/x-ejs-template" name="item">
       <div class="item" id="<%= _.htmlId(item._id) %>" data-id="<%= item._id %>">
-        <img src="<%= item.properties.image %>"/>
+        <img src="<%= item.properties.thumb %>"/>
         <% if (matches.length > 0) { %>
           <div class="markers">
             <% _.each(matches, function(match) { %>
@@ -110,7 +113,7 @@
 
     <script type="text/javascript">
       $(function() {
-        window.app = new Application({ dataset: "data/articles_2013_02_11.json"});
+        window.app = new Application({ dataset: "data/casey.json"});
         app.render();
 
         // Start responding to routes
@@ -130,11 +133,7 @@
   <body>
     <div id="container">
       <div id="header">
-        <div class="title"><a href="/">Ken</a> - A Visual Knowledge Browser</div>
-        <div class="powered-by">
-          example data provided by <a target="_blank" href="http://developer.nytimes.com/docs/read/most_popular_api">NYTimes API</a>
-          &nbsp;&nbsp; &middot; &nbsp;&nbsp;<a href="info.html">Connect your own data</a>
-        </div>
+        <div class="title"><a href="http://caseyagollan.com">Casey</a>, visualized by <a href="http://github.com/michael/ken">Ken</a>.</div>
       </div>
       <div id="main">
         Main Content
